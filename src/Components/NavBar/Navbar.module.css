@@ -1,6 +1,7 @@
 .navbar {
     align-items: center;
     background: #fff;
+    box-shadow: 0 15px 20px 0 rgba(17, 17, 26, 0.05);
     display: flex;
     font-size: 1.2rem;
     height: 86px;

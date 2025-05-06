@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Navbar.module.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 
 
 const Navbar = () => {
@@ -13,18 +13,25 @@ const Navbar = () => {
                   </NavLink>
                   <ul className={styles.navbar_menu}>
                     <li className={styles.nav_item}>
-                        <NavLink to="/" className={styles.nav_links}>
+              <NavLink to="/" className={styles.nav_links}>
+                <span>
+                  <img className={styles.icon_styles} src="/public/home-icon.png" alt="home" />
+                </span>
                             Home
                         </NavLink>
                       </li>
                       <li className={styles.nav_item}>
-                        <NavLink to="/" className={styles.nav_links}>
-                            About
+              <NavLink to="/signin" className={styles.nav_links}>
+                <span>
+                  <img className={styles.icon_styles} src="/public/sign-in.png" alt="signin" />
+                </span>
+                            Sign In
                         </NavLink>
                       </li>
                   </ul>
               </div>
-          </nav>
+      </nav>
+      <Outlet />
     </header>
   )
 }
