@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import styles from './Login.module.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { showSuccessToast, showErrorToast } from '../../utils/toast';
+import { useValue } from '../../Contexts/UserContext';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { loginUser } = useValue();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,18 +18,8 @@ const Login = () => {
             showErrorToast('Please fill in all fields');
             return;
         }
-
-        // Here you would typically have your actual login logic
-        // This is just for demonstration
-        if (email === 'test@example.com' && password === 'password') {
-            showSuccessToast('Login successful!');
-            // Navigate to home page after successful login
-            setTimeout(() => {
-                navigate('/');
-            }, 2000);
-        } else {
-            showErrorToast('Invalid email or password');
-        }
+        loginUser(email, password);
+        navigate('/');
     };
 
     return (

@@ -6,6 +6,7 @@ import Navbar from './Components/NavBar/Navbar';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
+import CustomUserContext from './Contexts/UserContext';
 
 function App() {
   const router = createBrowserRouter([
@@ -31,7 +32,9 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <CustomUserContext>
+        <RouterProvider router={router} />
+      </CustomUserContext>
       <ToastContainer
         position="top-right"
         autoClose={3000}
