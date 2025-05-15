@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import styles from './Register.module.css'
 import { showErrorToast } from '../../utils/toast';
+import { useValue } from '../../Contexts/UserContext';
 
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { registerUser } = useValue();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,12 +15,7 @@ const Register = () => {
       showErrorToast('Please fill in all fields');
       return;
     }
-    const user = {
-      name,
-      email,
-      password
-    }
-    console.log(user);
+    registerUser(name, email, password);
   }
 
   return (
