@@ -14,6 +14,7 @@ function useValue() {
 
 function CustomProductsContext({ children }) {
     const [products, setProducts] = useState([]);
+    const [originalProducts, setOriginalProducts] = useState([]);
 
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'products'), (snapshot) => {
@@ -24,16 +25,28 @@ function CustomProductsContext({ children }) {
                 }
             });
             setProducts(products);
+            setOriginalProducts(products);
         });
         return () => unsubscribe();
     }, []);
 
+    const searchProducts = (searchQuery) => {
+        if (!searchQuery.trim()) {
+            setProducts(originalProducts);
+            return;
+        }
+        const filteredProducts = originalProducts.filter((product) => {
+            return product.title.toLowerCase().includes(searchQuery.toLowerCase());
+        });
+        setProducts(filteredProducts);
+    }
+
     return (
-        <ProductsContext.Provider value={{ products }}>
+        <ProductsContext.Provider value={{ products, searchProducts }}>
             {children}
         </ProductsContext.Provider>
     );
 }
 
-export { ProductsContext, useValue };
+export { useValue };
 export default CustomProductsContext;

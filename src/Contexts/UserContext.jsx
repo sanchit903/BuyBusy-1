@@ -75,5 +75,5 @@ function CustomUserContext({ children }) {
     );
 }
 
-export { UserContext, useValue };
+export { useValue };
 export default CustomUserContext;
