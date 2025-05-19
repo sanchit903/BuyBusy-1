@@ -1,0 +1,42 @@
+.filterContainer {
+    background: #f0f0fc;
+    border-radius: 10px;
+    left: 0;
+    padding: 1rem;
+    position: fixed;
+    text-align: center;
+    top: 30%;
+    width: 14rem;
+}
+
+.filterContainer h2 {
+    color: #224957;
+    font-size: 1.25em;
+    font-weight: 700;
+    margin: 1rem 0;
+}
+
+.filterContainer_priceRange {
+    background-color: #7064e5;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 6px;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    width: 90%;
+}
+
+.filterContainer_categoryContainer {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    justify-content: center;
+}
+
+[type=checkbox] {
+    border-radius: .25rem;
+    height: 1rem;
+    margin-right: .5rem;
+    width: 1rem;
+}

@@ -15,6 +15,14 @@ function useValue() {
 function CustomProductsContext({ children }) {
     const [products, setProducts] = useState([]);
     const [originalProducts, setOriginalProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const capitalizeFirstLetter = (string) => {
+        return string.split(' ').map(word => 
+            word.charAt(0).toUpperCase() + word.slice(1)
+        ).join(' ');
+    };
 
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'products'), (snapshot) => {
@@ -26,6 +34,8 @@ function CustomProductsContext({ children }) {
             });
             setProducts(products);
             setOriginalProducts(products);
+            setLoading(false);
+            setCategories([...new Set(products.map((product) => capitalizeFirstLetter(product.category)))]);
         });
         return () => unsubscribe();
     }, []);
@@ -42,7 +52,7 @@ function CustomProductsContext({ children }) {
     }
 
     return (
-        <ProductsContext.Provider value={{ products, searchProducts }}>
+        <ProductsContext.Provider value={{ products, searchProducts, loading, categories }}>
             {children}
         </ProductsContext.Provider>
     );

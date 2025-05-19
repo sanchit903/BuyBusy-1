@@ -25,3 +25,11 @@
     margin: auto;
     width: 25%;
 }
+
+.spinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    width: 100%;
+}
