@@ -1,21 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './FilterSideBar.module.css';
 import { useValue } from '../../Contexts/ProductsContext';
 
 const FilterSidebar = () => {
-    const [price, setPrice] = useState(75000);
-    const { categories } = useValue();
+    const { 
+        categories, 
+        selectedCategories, 
+        price, 
+        handleCategoryChange, 
+        handlePriceChange 
+    } = useValue();
+
     return (
         <aside className={styles.filterContainer}>
             <h2>Filter</h2>
             <form>
                 <label htmlFor="price">Price: {price}</label>
-                <input type="range" id="price" name="price" min="0" max="100000" className={styles.filterContainer_priceRange} step={10} value={price} onChange={(e) => setPrice(e.target.value)} />
+                <input 
+                    type="range" 
+                    id="price" 
+                    name="price" 
+                    min="0" 
+                    max="100000" 
+                    className={styles.filterContainer_priceRange} 
+                    step={10} 
+                    value={price} 
+                    onChange={(e) => handlePriceChange(Number(e.target.value))} 
+                />
                 <h2>Category</h2>
                 <div className={styles.filterContainer_categoryContainer}>
                     {categories && categories.map((category) => (
                         <div key={category}>
-                            <input type="checkbox" id={category} name={category} />
+                            <input 
+                                type="checkbox" 
+                                id={category} 
+                                name={category}
+                                checked={selectedCategories.includes(category)}
+                                onChange={() => handleCategoryChange(category)}
+                            />
                             <label htmlFor={category}>
                                 <span>{category}</span>
                             </label>
